@@ -1,3 +1,43 @@
 .App {
   text-align: center;
+  justify-content: center;
+  display: grid;
+}
+
+h1 {
+  margin-bottom: 5vh;
+}
+
+.show-clicked {
+  height: 5vh;
+  background-color: blanchedalmond;
+}
+
+.numbers-container {
+  display: grid;
+
+  grid-template-columns: 8vh 8vh 8vh;
+  grid-gap: 0.5vw;
+  grid-template-rows: 4vw 4vw 4vw;
+}
+
+.number {
+  border: black solid 1px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.symbols-container {
+  display: grid;
+  grid-template-columns: 6.1vh 6.1vh 6.1vh 6.1vh;
+  grid-gap: 0.5vh;
+  grid-template-rows: 4vw;
+}
+
+.symbol {
+  border: black solid 1px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
