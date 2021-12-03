@@ -22,21 +22,87 @@ export default function Main() {
     '.',
     0,
     '=',
-    'clear',
+    'Clear',
   ];
 
   const [currentNum, setCurrentNum] = useState(0);
   const [secondNum, setSecondNum] = useState(0);
   const [currentSymbol, setCurrentSymbol] = useState('');
+  const [prevSymbol, setPrevSymbol] = useState('');
 
   const onClickNumber = (element) => {
-    currentNum === 0
-      ? setCurrentNum(element)
-      : setCurrentNum(currentNum.toString() + element.toString());
+    if (
+      element === '-' ||
+      element === '+' ||
+      element === '*' ||
+      element === '/' ||
+      element === '='
+    ) {
+      //check if needed
+      // currentSymbol !== '' && setPrevSymbol(currentSymbol);
+      currentSymbol !== '' && actionHandler();
+      setCurrentSymbol(element);
+      // if (currentSymbol !== '') {
+      //   setSecondNum(currentNum);
+      //   setCurrentNum(0);
+
+      //   actionHandler();
+      // }
+      currentSymbol == '' && setCurrentNum(0);
+      setSecondNum(parseFloat(currentNum));
+      // setCurrentNum(0);
+      setCurrentSymbol(element);
+    } else if (element === 'Clear') {
+      onClear();
+    } else {
+      currentNum === 0
+        ? setCurrentNum(parseFloat(element))
+        : setCurrentNum(parseFloat(currentNum.toString() + element.toString()));
+    }
+
+    // switch (currentSymbol) {
+    //   case '+':
+    //     break;
+    //   case '-':
+    //     break;
+    //   case '*':
+    //     break;
+    //   case '/':
+    //     break;
+    //   case '=':
+    //     break;
+    // }
 
     // console.log(currentNum);
     // console.log(currentNum.toString() + element.toString());
   };
+
+  function actionHandler() {
+    console.log('ggg');
+    // setSecondNum(Number(secondNum));
+    // setCurrentNum(Number(currentNum));
+
+    switch (currentSymbol) {
+      case '+':
+        setCurrentNum(secondNum + currentNum);
+        console.log(currentNum);
+        break;
+      case '-':
+        setCurrentNum(secondNum - currentNum);
+
+        break;
+      case '*':
+        setCurrentNum(secondNum * currentNum);
+
+        break;
+      case '/':
+        setCurrentNum(secondNum / currentNum);
+
+        break;
+      case '=':
+        break;
+    }
+  }
 
   const onClickSymbol = (symbol) => {
     setCurrentSymbol(Symbol);
@@ -49,6 +115,8 @@ export default function Main() {
     setCurrentSymbol('');
     setSecondNum(0);
   };
+
+  console.log(currentNum);
   return (
     <>
       <div className="show-clicked">{currentNum === 0 ? '' : currentNum}</div>
