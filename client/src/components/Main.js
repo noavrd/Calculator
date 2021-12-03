@@ -1,11 +1,27 @@
+import { useState } from 'react';
+
 import Action from './Action';
 import Number from './Number';
+
 export default function Main() {
   const symbols = ['/', '*', '-', '+'];
   const numbers = [7, 8, 9, 4, 5, 6, 1, 2, 3, 0, '.'];
+
+  const [currentNum, setCurrentNum] = useState(0);
+  const [secondNum, setSecondNum] = useState(0);
+  const [currentSymbol, setCurrentSymbol] = useState('');
+
+  const onClickNumber = (element) => {
+    currentNum === 0
+      ? setCurrentNum(element)
+      : setCurrentNum(currentNum.toString() + element.toString());
+
+    // console.log(currentNum);
+    // console.log(currentNum.toString() + element.toString());
+  };
   return (
     <>
-      <div className="show-clicked"></div>
+      <div className="show-clicked">{currentNum === 0 ? '' : currentNum}</div>
       <div className="symbols-container">
         {symbols.map((element, i) => (
           <div className="symbol">
@@ -16,7 +32,7 @@ export default function Main() {
 
       <div className="numbers-container">
         {numbers.map((element, i) => (
-          <div className="number">
+          <div className="number" onClick={() => onClickNumber(element)}>
             <Number eachNum={element} key={i} />
           </div>
         ))}
