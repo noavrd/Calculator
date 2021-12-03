@@ -4,7 +4,7 @@ import Action from './Action';
 import Number from './Number';
 
 export default function Main() {
-  const symbols = ['/', '*', '-', '+'];
+  const symbols = ['/', '*', '-', '+', '='];
   const numbers = [7, 8, 9, 4, 5, 6, 1, 2, 3, 0, '.'];
 
   const [currentNum, setCurrentNum] = useState(0);
@@ -18,6 +18,18 @@ export default function Main() {
 
     // console.log(currentNum);
     // console.log(currentNum.toString() + element.toString());
+  };
+
+  const onClickSymbol = (symbol) => {
+    setCurrentSymbol(Symbol);
+  };
+
+  const onSecondNumber = (num) => {};
+
+  const onClear = () => {
+    setCurrentNum(0);
+    setCurrentSymbol('');
+    setSecondNum(0);
   };
   return (
     <>
@@ -38,7 +50,7 @@ export default function Main() {
         ))}
       </div>
 
-      <div>Clear</div>
+      <div onClick={() => onClear()}>Clear</div>
     </>
   );
 }
