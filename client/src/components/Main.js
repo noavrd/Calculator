@@ -4,8 +4,26 @@ import Action from './Action';
 import Number from './Number';
 
 export default function Main() {
-  const symbols = ['/', '*', '-', '+', '='];
-  const numbers = [7, 8, 9, 4, 5, 6, 1, 2, 3, 0, '.'];
+  const symbols = [];
+  const numbers = [
+    '*',
+    '-',
+    '+',
+    '/',
+    7,
+    8,
+    9,
+    4,
+    5,
+    6,
+    1,
+    2,
+    3,
+    '.',
+    0,
+    '=',
+    'clear',
+  ];
 
   const [currentNum, setCurrentNum] = useState(0);
   const [secondNum, setSecondNum] = useState(0);
@@ -34,23 +52,26 @@ export default function Main() {
   return (
     <>
       <div className="show-clicked">{currentNum === 0 ? '' : currentNum}</div>
-      <div className="symbols-container">
+      {/* <div className="symbols-container">
         {symbols.map((element, i) => (
           <div className="symbol">
             <Action symbol={element} key={i} />
           </div>
         ))}
-      </div>
+      </div> */}
 
       <div className="numbers-container">
         {numbers.map((element, i) => (
-          <div className="number" onClick={() => onClickNumber(element)}>
+          <div
+            id={`item${i}`}
+            className="number"
+            onClick={() => onClickNumber(element)}>
             <Number eachNum={element} key={i} />
           </div>
         ))}
       </div>
 
-      <div onClick={() => onClear()}>Clear</div>
+      {/* <div onClick={() => onClear()}>Clear</div> */}
     </>
   );
 }

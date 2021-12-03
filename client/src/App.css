@@ -16,9 +16,9 @@ h1 {
 .numbers-container {
   display: grid;
 
-  grid-template-columns: 8vh 8vh 8vh;
+  grid-template-columns: 8vh 8vh 8vh 8vh;
   grid-gap: 0.5vw;
-  grid-template-rows: 4vw 4vw 4vw;
+  grid-template-rows: 4vw 4vw 4vw 4vw 4vw;
 }
 
 .number {
@@ -28,6 +28,16 @@ h1 {
   align-items: center;
 }
 
+#item15 {
+  grid-row-start: 2;
+  grid-row-end: 5;
+  grid-column-start: 4;
+}
+
+#item16 {
+  grid-column-start: 3;
+  grid-column-end: 5;
+}
 .symbols-container {
   display: grid;
   grid-template-columns: 6.1vh 6.1vh 6.1vh 6.1vh;
