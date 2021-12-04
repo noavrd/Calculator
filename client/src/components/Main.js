@@ -6,9 +6,9 @@ import Number from './Number';
 export default function Main() {
   const symbols = [];
   const numbers = [
-    '*',
-    '-',
     '+',
+    '-',
+    '*',
     '/',
     7,
     8,
@@ -59,22 +59,6 @@ export default function Main() {
         ? setCurrentNum(parseFloat(element))
         : setCurrentNum(parseFloat(currentNum.toString() + element.toString()));
     }
-
-    // switch (currentSymbol) {
-    //   case '+':
-    //     break;
-    //   case '-':
-    //     break;
-    //   case '*':
-    //     break;
-    //   case '/':
-    //     break;
-    //   case '=':
-    //     break;
-    // }
-
-    // console.log(currentNum);
-    // console.log(currentNum.toString() + element.toString());
   };
 
   function actionHandler() {
@@ -120,7 +104,11 @@ export default function Main() {
   return (
     <div className="main">
       <div className="show-clicked">
-        {currentSymbol === '' ? currentNum : currentNum === 0 ? '' : currentNum}
+        {secondNum !== 0 && currentNum === 0
+          ? secondNum
+          : currentNum === 0
+          ? ''
+          : currentNum}
       </div>
       {/* <div className="symbols-container">
         {symbols.map((element, i) => (
