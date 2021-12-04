@@ -1,3 +1,11 @@
+body {
+  background-image: url('./background.png');
+  /* height: 100%; */
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-attachment: fixed;
+}
 .App {
   text-align: center;
   justify-content: center;
@@ -8,14 +16,20 @@ h1 {
   margin-bottom: 5vh;
 }
 
+.main {
+  background-color: white;
+}
+
 .show-clicked {
-  height: 5vh;
-  background-color: blanchedalmond;
+  /* height: 6vh; */
+  padding-top: 3vh;
+  padding-bottom: 3vh;
+
+  /* background-color: blanchedalmond; */
 }
 
 .numbers-container {
   display: grid;
-
   grid-template-columns: 8vh 8vh 8vh 8vh;
   grid-gap: 0.5vw;
   grid-template-rows: 4vw 4vw 4vw 4vw 4vw;

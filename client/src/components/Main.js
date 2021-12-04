@@ -84,22 +84,22 @@ export default function Main() {
 
     switch (currentSymbol) {
       case '+':
-        setCurrentNum(secondNum + currentNum);
+        setCurrentNum(parseFloat(secondNum + currentNum));
         console.log(currentNum);
         break;
       case '-':
-        setCurrentNum(secondNum - currentNum);
+        setCurrentNum(parseFloat(secondNum - currentNum));
 
         break;
       case '*':
-        setCurrentNum(secondNum * currentNum);
+        setCurrentNum(parseFloat(secondNum * currentNum));
 
         break;
       case '/':
-        setCurrentNum(secondNum / currentNum);
-
+        setCurrentNum(parseFloat(secondNum / currentNum));
         break;
       case '=':
+        setCurrentSymbol('');
         break;
     }
   }
@@ -118,8 +118,10 @@ export default function Main() {
 
   console.log(currentNum);
   return (
-    <>
-      <div className="show-clicked">{currentNum === 0 ? '' : currentNum}</div>
+    <div className="main">
+      <div className="show-clicked">
+        {currentSymbol === '' ? currentNum : currentNum === 0 ? '' : currentNum}
+      </div>
       {/* <div className="symbols-container">
         {symbols.map((element, i) => (
           <div className="symbol">
@@ -140,6 +142,6 @@ export default function Main() {
       </div>
 
       {/* <div onClick={() => onClear()}>Clear</div> */}
-    </>
+    </div>
   );
 }
