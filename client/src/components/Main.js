@@ -29,6 +29,7 @@ export default function Main() {
   const [secondNum, setSecondNum] = useState(0);
   const [currentSymbol, setCurrentSymbol] = useState('');
   const [prevSymbol, setPrevSymbol] = useState('');
+  const [clickedSymbol, setClickedSymbol] = useState(false);
 
   const onClickNumber = (element) => {
     if (
@@ -52,12 +53,19 @@ export default function Main() {
       setSecondNum(parseFloat(currentNum));
       // setCurrentNum(0);
       setCurrentSymbol(element);
+      setClickedSymbol(true);
     } else if (element === 'Clear') {
       onClear();
     } else {
+      console.log(currentNum);
+      if (clickedSymbol) {
+        setSecondNum(parseFloat(currentNum));
+      }
       currentNum === 0
         ? setCurrentNum(parseFloat(element))
         : setCurrentNum(parseFloat(currentNum.toString() + element.toString()));
+
+      setClickedSymbol(false);
     }
   };
 
@@ -98,12 +106,16 @@ export default function Main() {
     setCurrentNum(0);
     setCurrentSymbol('');
     setSecondNum(0);
+    setClickedSymbol(false);
   };
 
   console.log(currentNum);
+  console.log(secondNum);
+  console.log(clickedSymbol);
   return (
     <div className="main">
       <div className="show-clicked">
+        {/* Check if there is a previous number to show  */}
         {secondNum !== 0 && currentNum === 0
           ? secondNum
           : currentNum === 0
