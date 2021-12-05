@@ -4,7 +4,6 @@ import Action from './Action';
 import Number from './Number';
 
 export default function Main() {
-  const symbols = [];
   const numbers = [
     '+',
     '-',
@@ -28,8 +27,7 @@ export default function Main() {
   const [currentNum, setCurrentNum] = useState(0);
   const [secondNum, setSecondNum] = useState(0);
   const [currentSymbol, setCurrentSymbol] = useState('');
-  const [prevSymbol, setPrevSymbol] = useState('');
-  const [clickedSymbol, setClickedSymbol] = useState(false);
+  const [secondClick, setSecondClick] = useState(false);
 
   const onClickNumber = (element) => {
     if (
@@ -39,109 +37,76 @@ export default function Main() {
       element === '/' ||
       element === '='
     ) {
-      //check if needed
-      // currentSymbol !== '' && setPrevSymbol(currentSymbol);
-      currentSymbol !== '' && actionHandler();
       setCurrentSymbol(element);
-      // if (currentSymbol !== '') {
-      //   setSecondNum(currentNum);
-      //   setCurrentNum(0);
-
-      //   actionHandler();
-      // }
-      currentSymbol == '' && setCurrentNum(0);
-      setSecondNum(parseFloat(currentNum));
-      // setCurrentNum(0);
-      setCurrentSymbol(element);
-      setClickedSymbol(true);
+      if (secondClick) {
+        actionHandler();
+        setSecondNum(currentNum);
+        setSecondClick(false);
+      } else {
+        setSecondNum(currentNum);
+        setCurrentNum(0);
+        setSecondClick(true);
+      }
     } else if (element === 'Clear') {
       onClear();
     } else {
-      console.log(currentNum);
-      if (clickedSymbol) {
-        setSecondNum(parseFloat(currentNum));
-      }
       currentNum === 0
-        ? setCurrentNum(parseFloat(element))
-        : setCurrentNum(parseFloat(currentNum.toString() + element.toString()));
-
-      setClickedSymbol(false);
+        ? setCurrentNum(element.toString())
+        : setCurrentNum(currentNum.toString() + element.toString());
     }
   };
 
   function actionHandler() {
     console.log('ggg');
-    // setSecondNum(Number(secondNum));
-    // setCurrentNum(Number(currentNum));
-
     switch (currentSymbol) {
       case '+':
-        setCurrentNum(parseFloat(secondNum + currentNum));
+        setCurrentNum(parseFloat(secondNum) + parseFloat(currentNum));
         console.log(currentNum);
         break;
       case '-':
-        setCurrentNum(parseFloat(secondNum - currentNum));
+        setCurrentNum(parseFloat(secondNum) - parseFloat(currentNum));
 
         break;
       case '*':
-        setCurrentNum(parseFloat(secondNum * currentNum));
-
+        setCurrentNum(parseFloat(secondNum) * parseFloat(currentNum));
         break;
       case '/':
-        setCurrentNum(parseFloat(secondNum / currentNum));
+        setCurrentNum(parseFloat(secondNum) / parseFloat(currentNum));
         break;
       case '=':
         setCurrentSymbol('');
         break;
     }
+    setCurrentSymbol('');
   }
-
-  const onClickSymbol = (symbol) => {
-    setCurrentSymbol(Symbol);
-  };
-
-  const onSecondNumber = (num) => {};
 
   const onClear = () => {
     setCurrentNum(0);
     setCurrentSymbol('');
     setSecondNum(0);
-    setClickedSymbol(false);
+    setSecondClick(false);
   };
 
   console.log(currentNum);
   console.log(secondNum);
-  console.log(clickedSymbol);
+  console.log(currentSymbol);
+
   return (
     <div className="main">
       <div className="show-clicked">
         {/* Check if there is a previous number to show  */}
-        {secondNum !== 0 && currentNum === 0
-          ? secondNum
-          : currentNum === 0
-          ? ''
-          : currentNum}
+        {secondNum !== 0 && currentNum === 0 ? secondNum : currentNum}
       </div>
-      {/* <div className="symbols-container">
-        {symbols.map((element, i) => (
-          <div className="symbol">
-            <Action symbol={element} key={i} />
-          </div>
-        ))}
-      </div> */}
-
       <div className="numbers-container">
         {numbers.map((element, i) => (
-          <div
+          <button
             id={`item${i}`}
             className="number"
             onClick={() => onClickNumber(element)}>
             <Number eachNum={element} key={i} />
-          </div>
+          </button>
         ))}
       </div>
-
-      {/* <div onClick={() => onClear()}>Clear</div> */}
     </div>
   );
 }
