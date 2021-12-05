@@ -1,3 +1,3 @@
-export default function Number({ eachNum }) {
-  return <>{eachNum}</>;
+export default function Number({ symbol }) {
+  return <>{symbol}</>;
 }

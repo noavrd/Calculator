@@ -1,6 +1,5 @@
 import { useState } from 'react';
 
-import Action from './Action';
 import Number from './Number';
 
 export default function Main() {
@@ -30,6 +29,7 @@ export default function Main() {
   const [secondClick, setSecondClick] = useState(false);
 
   const onClickNumber = (element) => {
+    // Check if it a symbol, a number or a clear button
     if (
       element === '-' ||
       element === '+' ||
@@ -57,11 +57,9 @@ export default function Main() {
   };
 
   function actionHandler() {
-    console.log('ggg');
     switch (currentSymbol) {
       case '+':
         setCurrentNum(parseFloat(secondNum) + parseFloat(currentNum));
-        console.log(currentNum);
         break;
       case '-':
         setCurrentNum(parseFloat(secondNum) - parseFloat(currentNum));
@@ -87,10 +85,6 @@ export default function Main() {
     setSecondClick(false);
   };
 
-  console.log(currentNum);
-  console.log(secondNum);
-  console.log(currentSymbol);
-
   return (
     <div className="main">
       <div className="show-clicked">
@@ -101,9 +95,10 @@ export default function Main() {
         {numbers.map((element, i) => (
           <button
             id={`item${i}`}
+            key={i}
             className="number"
             onClick={() => onClickNumber(element)}>
-            <Number eachNum={element} key={i} />
+            <Number symbol={element} />
           </button>
         ))}
       </div>
